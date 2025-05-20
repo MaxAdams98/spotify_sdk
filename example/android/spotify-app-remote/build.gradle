@@ -1,2 +1,24 @@
+apply plugin: 'com.android.library'
+
+android {
+    namespace 'com.spotify.android.appremote'
+    compileSdk 34
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 34
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+}
+
 configurations.maybeCreate("default")
 artifacts.add("default", file('spotify-app-remote-release-0.8.0.aar'))
