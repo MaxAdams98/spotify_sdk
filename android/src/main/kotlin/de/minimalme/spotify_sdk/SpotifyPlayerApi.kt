@@ -2,7 +2,12 @@ package de.minimalme.spotify_sdk
 
 import com.google.gson.Gson
 import com.spotify.android.appremote.api.SpotifyAppRemote
-import com.spotify.protocol.types.PlaybackSpeed
+import com.spotify.protocol.types.PlayerState
+import com.spotify.protocol.types.PlayerRestrictions
+import com.spotify.protocol.types.Track
+import com.spotify.protocol.types.Album
+import com.spotify.protocol.types.Artist
+import com.spotify.protocol.types.ImageUri
 import io.flutter.plugin.common.MethodChannel
 
 class SpotifyPlayerApi(spotifyAppRemote: SpotifyAppRemote?, result: MethodChannel.Result) : BaseSpotifyApi(spotifyAppRemote, result) {
