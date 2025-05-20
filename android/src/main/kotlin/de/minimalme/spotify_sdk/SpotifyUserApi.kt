@@ -16,7 +16,7 @@ class SpotifyUserApi(spotifyAppRemote: SpotifyAppRemote?, result: MethodChannel.
     fun addToUserLibrary(spotifyUri: String?) {
         if (userApi != null && !spotifyUri.isNullOrBlank()) {
             userApi.addToLibrary(spotifyUri)
-                    .setResultCallback {result.success(true)}
+                    .setResultCallback { result.success(true) }
                     .setErrorCallback { throwable -> result.error(errorAddToLibrary, "error when adding uri to user library", throwable.toString()) }
         } else if (spotifyUri.isNullOrBlank()) {
             result.error(errorAddToLibrary, "spotifyUri has invalid format", "")
@@ -25,10 +25,10 @@ class SpotifyUserApi(spotifyAppRemote: SpotifyAppRemote?, result: MethodChannel.
         }
     }
 
-    fun removeFromUserLibrary(spotifyUri: String?){
+    fun removeFromUserLibrary(spotifyUri: String?) {
         if (userApi != null && !spotifyUri.isNullOrBlank()) {
             userApi.removeFromLibrary(spotifyUri)
-                    .setResultCallback {result.success(true)}
+                    .setResultCallback { result.success(true) }
                     .setErrorCallback { throwable -> result.error(errorRemoveFromLibrary, "error when removing uri from user library", throwable.toString()) }
         } else if (spotifyUri.isNullOrBlank()) {
             result.error(errorRemoveFromLibrary, "spotifyUri has invalid format", "")
@@ -37,21 +37,23 @@ class SpotifyUserApi(spotifyAppRemote: SpotifyAppRemote?, result: MethodChannel.
         }
     }
 
-    fun getCapabilities(){
+    fun getCapabilities() {
         if (userApi != null) {
             userApi.capabilities
-                    .setResultCallback {capabilities ->  result.success(Gson().toJson(capabilities))}
+                    .setResultCallback { capabilities -> result.success(Gson().toJson(capabilities)) }
                     .setErrorCallback { throwable -> result.error(errorGettingCapabilities, "error when getting capabilities", throwable.toString()) }
         } else {
             spotifyRemoteAppNotSetError()
         }
     }
 
-    fun getLibraryState(spotifyUri: String?){
+    fun getLibraryState(spotifyUri: String?) {
         if (userApi != null && !spotifyUri.isNullOrBlank()) {
             userApi.getLibraryState(spotifyUri)
-                    .setResultCallback {libraryState ->  result.success(Gson().toJson(libraryState))}
+                    .setResultCallback { libraryState -> result.success(Gson().toJson(libraryState)) }
                     .setErrorCallback { throwable -> result.error(errorGettingLibraryState, "error when getting the library state", throwable.toString()) }
+        } else if (spotifyUri.isNullOrBlank()) {
+            result.error(errorGettingLibraryState, "spotifyUri has invalid format", "")
         } else {
             spotifyRemoteAppNotSetError()
         }
